@@ -3,14 +3,16 @@ import {
   fetchJobApplicationForCandidateAction,
 } from "@/actions";
 import CandidateActivity from "@/components/candidate-activity";
-import { currentUser } from "@clerk/nextjs/dist/types/server";
+import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 
 const Activity = async () => {
-  const user = currentUser();
+  const user = await currentUser();
+  console.log("this is id", user);
+
   const jobList = await fetchCandidateJobsAction();
-  const jobApplicants = await fetchJobApplicationForCandidateAction();
-  return <CandidateActivity jobList={jobList} jobApplicants={jobApplicants}/>;
+  const jobApplicants = await fetchJobApplicationForCandidateAction(user?.id);
+  return <CandidateActivity jobList={jobList} jobApplicants={jobApplicants} />;
 };
 
 export default Activity;

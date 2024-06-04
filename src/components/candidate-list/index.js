@@ -4,7 +4,10 @@ import JobIcon from "../job-icon";
 import JobApplicants from "../job-applicants";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent } from "../ui/dialog";
-import { getCandidateDetailsByIdAction, updateJobApplicationAction } from "@/actions";
+import {
+  getCandidateDetailsByIdAction,
+  updateJobApplicationAction,
+} from "@/actions";
 import { createClient } from "@supabase/supabase-js";
 const supabaseClient = createClient(
   "https://iklbjnoopszqonqmjtvr.supabase.co",
@@ -56,7 +59,7 @@ const CandidateList = ({
     await updateJobApplicationAction(jobApplicantsToUpdate, "/jobs");
   };
 
-  console.log("updated data", jobApplicationList)
+  console.log("updated data", jobApplicationList);
   return (
     <Fragment>
       <div className="grid grid-cols-1 gap-3 p-10 md:grid-cols-2 lg:grid-cols-3">
@@ -185,6 +188,35 @@ const CandidateList = ({
                 ?.status.includes("selected")
                 ? "Selected"
                 : "Select"}
+            </Button>
+            <Button
+              onClick={() => handleUpdateJobStatus("rejected")}
+              className=" disabled:opacity-65 flex h-11 items-center justify-center px-5"
+              disabled={
+                jobApplicationList
+                  .find(
+                    (item) =>
+                      item.candidateUserID === currentCandidateDetails?.userId
+                  )
+                  ?.status.includes("selected") ||
+                jobApplicationList
+                  .find(
+                    (item) =>
+                      item.candidateUserID === currentCandidateDetails?.userId
+                  )
+                  ?.status.includes("rejected")
+                  ? true
+                  : false
+              }
+            >
+              {jobApplicationList
+                .find(
+                  (item) =>
+                    item.candidateUserID === currentCandidateDetails?.userId
+                )
+                ?.status.includes("rejected")
+                ? "Rejected"
+                : "Reject"}
             </Button>
           </div>
         </DialogContent>

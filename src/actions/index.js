@@ -69,10 +69,18 @@ export const fetchJobForRecruiterAction = async (id) => {
 
 //candite jobs fetch
 
-export const fetchCandidateJobsAction = async () => {
+export const fetchCandidateJobsAction = async (filterParams = {}) => {
   await dbConnecttion();
-  const jobs = await Job.find({});
-  return JSON.parse(JSON.stringify(jobs));
+  let updatedParams = {};
+  Object.keys(filterParams).forEach((filterKey) => {
+    updatedParams[filterKey] = { $in: filterParams[filterKey].split(",") };
+  });
+  console.log(updatedParams, "updatedParams");
+  const result = await Job.find(
+    filterParams && Object.keys(filterParams).length > 0 ? updatedParams : {}
+  );
+
+  return JSON.parse(JSON.stringify(result));
 };
 
 //job applicaiton action
@@ -135,4 +143,11 @@ export const getCandidateDetailsByIdAction = async (id) => {
   await dbConnecttion();
   const candidate = await Profile.findOne({ userId: id });
   return JSON.parse(JSON.stringify(candidate));
+};
+
+//filter categories
+export const filterCategoriesAction = async () => {
+  await dbConnecttion();
+  const categories = await Job.find({});
+  return JSON.parse(JSON.stringify(categories));
 };
