@@ -12,6 +12,7 @@ const CommonForm = ({
   setFormData,
   handleFileChange,
   buttonText,
+  loader
 }) => {
   const renderInputByComponentType = (getCurrentControl) => {
     let content = null;
@@ -87,7 +88,7 @@ const CommonForm = ({
           disabled={isBtnDisabled}
           className="disabled:opacity-60 flex justify-center items-center px-5 h-11"
         >
-          {buttonText}
+          {loader ? "Updating...":buttonText}
         </Button>
       </div>
     </form>

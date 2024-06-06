@@ -31,6 +31,7 @@ const JobsListing = ({
       };
     } else {
       const indexOfCurrentOption = copyFilterParams[id].indexOf(curOption);
+      console.log("indexOfCurrentOption", indexOfCurrentOption);
       if (indexOfCurrentOption === -1) {
         copyFilterParams[id].push(curOption);
       } else {
@@ -63,8 +64,6 @@ const JobsListing = ({
       ...new Set(fetchFilterCategories.map((listItem) => listItem[item.id])),
     ],
   }));
-
-  console.log(filterParams, "filterParams");
   return (
     <div className="mx-auto max-w-7xl">
       <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
@@ -129,6 +128,7 @@ const JobsListing = ({
                             jobApplicationList={jobApplicationList}
                             profileInfo={profileInfo}
                             job={job}
+                            user={user}
                           />
                         )}
                       </Fragment>

@@ -6,8 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 
-const Header = ({user, profileInfo}) => {
-  
+const Header = ({ user, profileInfo }) => {
   const menuItems = [
     {
       id: 1,
@@ -80,17 +79,23 @@ const Header = ({user, profileInfo}) => {
           </div>
         </SheetContent>
       </Sheet>
-      <Link href={"/"} className="hidden lg:flex mr-6">JOBSCO</Link>
+      <Link href={"/"} className="hidden lg:flex mr-6">
+        JOBSCO
+      </Link>
       <nav className="ml-auto hidden lg:flex gap-6">
-        {
-            menuItems.map((menuItem) => (
-                menuItem.show ? 
-                <Link href={menuItem.path} className="group inine-flex w-max items-center rounded-md px-4 py-2 bg-white text-sm font-mediumF" key={menuItem.id}>
-                    {menuItem.label}
-                </Link>: null
-            ))
-        }
-        <UserButton afterSignOutUrl="/"/>
+        {menuItems.map((menuItem) =>
+          menuItem.show ? (
+            <Link
+              href={menuItem.path}
+              className="group inine-flex w-max items-center rounded-md px-4 py-2 bg-white text-sm font-mediumF"
+              key={menuItem.id}
+              onClick={() => sessionStorage.removeItem("filterParams")}
+            >
+              {menuItem.label}
+            </Link>
+          ) : null
+        )}
+        <UserButton afterSignOutUrl="/" />
       </nav>
     </header>
   );

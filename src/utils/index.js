@@ -144,7 +144,22 @@ export const initialCandidateFormData = {
   githubProfile: "",
   isPremium: false,
 };
-
+export const initialCandidateAccountFormData = {
+  name: "",
+  currentJobLocation: "",
+  preferedJobLocation: "",
+  currentSalary: "",
+  noticePeriod: "",
+  skills: "",
+  currentCompany: "",
+  previousCompanies: "",
+  totalExperience: "",
+  college: "",
+  collegeLocation: "",
+  graduatedYear: "",
+  linkedinProfile: "",
+  githubProfile: "",
+};
 // post job contrls
 
 export const postNewJobFormControls = [
@@ -242,3 +257,22 @@ export function formUrlQuery({ params, dataToAdd }) {
     }
   );
 }
+
+
+export const membershipPlans = [
+  {
+    heading: "Tier 1",
+    price: 100,
+    type: "basic",
+  },
+  {
+    heading: "Tier 2",
+    price: 1000,
+    type: "teams",
+  },
+  {
+    heading: "Tier 3",
+    price: 5000,
+    type: "enterprise",
+  },
+];  
